@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  become: true
+  gather_facts: yes
+  collections:
+    - ansible.netcommon
+  vars:
+    ipv4_netmask: "{{ ansible_default_ipv4.network }}/{{ ansible_default_ipv4.netmask }}"
+    ipv4_subnet: "{{ ipv4_netmask | ipaddr('net') }}"
+    ipv4_pool_size: 27
+  tasks:
+    - name: "create macvlan"
+      docker_network:
+        name: localnet
+        enable_ipv6: no
+        driver: macvlan
+        driver_options:
+          parent: "{{ ansible_default_ipv4.interface }}"
+        ipam_config:
+          - subnet: "{{ ipv4_subnet }}"
+            gateway: "{{ ansible_default_ipv4.gateway }}"
+            iprange: "{{ ipv4_subnet | ipsubnet(ipv4_pool_size, -1) }}"
