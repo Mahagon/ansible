@@ -1,0 +1,43 @@
+---
+- hosts: localhost
+  become: true
+  gather_facts: no
+  vars:
+    dockerimage: traefik
+    containername: traefik
+    basedir: /media/data
+  tasks:
+    - name: "pull {{ dockerimage }} docker image"
+      docker_image:
+        name: "{{ dockerimage }}"
+        source: pull
+    - name: ensure traefik folder exists
+      file:
+        state: directory
+        path: "{{ basedir }}/traefik"
+        force: no
+        recurse: yes
+    - name: ensure traefik.toml file exists
+      copy:
+        content: |
+          [providers.docker]
+          [api]
+            dashboard = true
+            insecure = true
+        dest: "{{ basedir }}/traefik/traefik.toml"
+    - name: "create container {{ containername }}"
+      docker_container:
+        name: "{{ containername }}"
+        hostname: "{{ containername }}"
+        image: "{{ dockerimage }}"
+        mounts:
+          - source: "{{ basedir }}/traefik/traefik.toml"
+            target: /etc/traefik/traefik.toml
+            read_only: no
+            type: bind
+        restart_policy: unless-stopped
+        restart: yes
+        state: started
+        published_ports:
+          - 80:80
+          - 8080:8080
