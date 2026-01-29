@@ -3,6 +3,7 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "ansible.lightspeed.enabled": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.enable": true,
   "editor.tabSize": 2,
