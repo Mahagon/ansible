@@ -1,0 +1,3 @@
+---
+- ansible.builtin.include_tasks: basic-apps.yml
+- ansible.builtin.include_tasks: hytale.yml

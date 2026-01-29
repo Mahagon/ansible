@@ -1,0 +1,8 @@
+---
+- name: Install hytale
+  become: true
+  become_user: aur_builder
+  kewlfft.aur.aur:
+    use: paru
+    name:
+      - hytale-launcher-bin
