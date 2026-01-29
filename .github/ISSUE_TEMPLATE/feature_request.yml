@@ -38,3 +38,11 @@ body:
       placeholder: Identify any unresolved issues.
     validations:
       required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/Mahagon/ansible?tab=coc-ov-file).
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
