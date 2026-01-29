@@ -1,0 +1,14 @@
+{
+  "[github-actions-workflow]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.enable": true,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true
+}
