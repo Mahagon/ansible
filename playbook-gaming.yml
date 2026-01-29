@@ -1,0 +1,6 @@
+---
+- name: CachyOS Gaming PC
+  hosts: localhost
+  become: true
+  roles:
+    - common
